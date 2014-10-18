@@ -1,5 +1,7 @@
 package com.aurelpaulovic.transaction
 
+import com.aurelpaulovic.transaction.config.TransactionConfig
+
 class BlockTransaction private[transaction] (protected val conf: TransactionConfig) extends Transaction {
   def apply(transBlock: => Unit): Unit = {
     println("start BlockTransaction")
