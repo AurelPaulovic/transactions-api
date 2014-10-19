@@ -20,13 +20,27 @@ class Config private (properties: List[ConfigProperty]) {
     ret
   }
   
-  def and(lastProp: LastPropertyUnitUnit): Unit = new Config(lastProp.property :: properties).execute(lastProp.callBlock)
+  def and(lastProp: LastPropertyUnitUnit): Unit = {
+    new Config(lastProp.property :: properties).execute(lastProp.callBlock)
+    println("after execute with Unit => Unit result")
+  }
   
-  def and[T](lastProp: LastPropertyUnitT[T]): T = new Config(lastProp.property :: properties).execute(lastProp.callBlock)
+  def and[T](lastProp: LastPropertyUnitT[T]): T = {
+    val x = new Config(lastProp.property :: properties).execute(lastProp.callBlock)
+    println("after execute with Unit => T result")
+    x
+  }
 
-  def and(lastProp: LastPropertyContextUnit): Unit = new Config(lastProp.property :: properties).execute(lastProp.callBlock)
+  def and(lastProp: LastPropertyContextUnit): Unit = {
+    new Config(lastProp.property :: properties).execute(lastProp.callBlock)
+    println("after execute with Context => Unit result")
+  }
   
-  def and[T](lastProp: LastPropertyContextT[T]): T = new Config(lastProp.property :: properties).execute(lastProp.callBlock)
+  def and[T](lastProp: LastPropertyContextT[T]): T = {
+    val x = new Config(lastProp.property :: properties).execute(lastProp.callBlock)
+    println("after execute with Context => T result")
+    x
+  }
 }
 
 object Config {

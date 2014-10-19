@@ -11,29 +11,34 @@ import com.aurelpaulovic.transaction.config.properties.ImmediatePublish
 object Main2 {
   def main(args: Array[String]): Unit = {
     val x1 = ImmediatePublish() and Timeout(1) {
-      println("block1")
+      println("Unit => Int")
       1
     }
     
     val x2 = ImmediatePublish() and Timeout(2) { context: Context =>
-      println("block2")
+      println("Context => Unit")
     }
     
     ImmediatePublish() and Timeout(200) { context: Context =>
-      println("block2.1")
+      println("Context => Unit")
     }
     
     ImmediatePublish() and Timeout(202) {
-      println("block2.2")
+      println("Unit => Unit")
+    }
+    
+    ImmediatePublish() and Timeout(202) {
+      println("Unit => Int")
+      2.3
     }
     
     val x3 = Timeout(3) and Locking() and Retries(2) {
-      println("block3")
+      println("Unit => Int")
       3
     }
     
     val x4 = Timeout(4) and Locking() and Retries(2) { context: Context =>
-      println("block4")
+      println("Context => Int")
       4
     }
     
