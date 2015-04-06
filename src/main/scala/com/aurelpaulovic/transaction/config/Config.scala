@@ -6,6 +6,7 @@ import com.aurelpaulovic.transaction.config.properties.LastPropertyContextT
 import com.aurelpaulovic.transaction.config.properties.LastPropertyUnitUnit
 import com.aurelpaulovic.transaction.config.properties.LastPropertyUnitT
 import com.aurelpaulovic.transaction.config.properties.LastPropertyContextUnit
+import com.aurelpaulovic.transaction.config.returntype.ForceOption
 
 class Config private (properties: List[ConfigProperty]) {
   def and(prop: ConfigProperty): Config = new Config(prop :: properties)
@@ -40,6 +41,15 @@ class Config private (properties: List[ConfigProperty]) {
     val x = new Config(lastProp.property :: properties).execute(lastProp.callBlock)
     println("after execute with Context => T result")
     x
+  }
+  
+  //def apply[T](transBlock: => T): Unit = ()
+  //def apply[T,U](transBlock: T => U): Unit = ()
+  //def apply(transBlock: => Unit): Unit = ()
+  //def apply[T](transBlock: T => Unit): Unit = ()
+  
+  def transaction[T](transBlock: Context with ForceOption => T): Unit = {
+    println(" => Unit")
   }
 }
 
